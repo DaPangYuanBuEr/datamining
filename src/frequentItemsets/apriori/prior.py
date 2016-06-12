@@ -1,7 +1,7 @@
 '''
 Created on 2016-6-12
 
-@author: XiaoYuan1
+@author: XiaoYuan1  
 '''
 
 def loadDataSet():
