@@ -38,6 +38,8 @@ def scanD(D,ck,minSupport):
             supportData[key] = support
     return retList,supportData
 
+
+
 def aprioriGen(Lk,k):
     retList = []
     lenLK = len(Lk)
