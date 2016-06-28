@@ -9,6 +9,9 @@ Created on 2016年6月22日
 
 
 
+
+
+
 class treeNode:
     def __init__(self,namevalue,numOccur,parentnode):
         self.name = namevalue

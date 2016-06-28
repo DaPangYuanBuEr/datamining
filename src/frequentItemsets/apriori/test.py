@@ -5,6 +5,9 @@ Created on 2016-6-12
 '''
 
 
+
+
+
 import prior
 
 dataset = prior.loadDataSet()
