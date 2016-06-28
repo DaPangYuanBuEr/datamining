@@ -8,9 +8,6 @@ def loadDataSet():
     return [[1,3,4],[2,3,5],[1,2,3,5],[2,5]]
 
 
-
-
-
 def createC1(dataSet):
     C1 = []
     for transation in dataSet:
@@ -39,6 +36,8 @@ def scanD(D,ck,minSupport):
             retList.insert(0, key)
             supportData[key] = support
     return retList,supportData
+
+
 
 def aprioriGen(Lk,k):
     retList = []
@@ -72,8 +71,6 @@ def apriori(dataset,minSupport):
     return L,supportData
            
 
-
-
 def calcConf(freqSet,H,supportData,brl,minConf=0.7):
     prunedH=[]
     for conseq in H:
@@ -85,8 +82,8 @@ def calcConf(freqSet,H,supportData,brl,minConf=0.7):
         
     return prunedH
 
+
 def rulesFromConseq(freqSet,H,supportData,brl,minConf=0.7):
-     
     m=len(H[0])
     if (len(freqSet)>m+1):
         Hmp1=aprioriGen(H,m+1)
@@ -94,8 +91,8 @@ def rulesFromConseq(freqSet,H,supportData,brl,minConf=0.7):
         if (len(Hmp1)>1):
             rulesFromConseq(freqSet,Hmp1,supportData,brl,minConf)
             
+            
 def generateRules(L,supportData,minConf=0.7):
-  
     bigRuleList=[]
     for i in range(1,len(L)):
         for freqSet in L[i]:

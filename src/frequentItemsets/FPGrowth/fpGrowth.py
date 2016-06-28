@@ -1,16 +1,9 @@
- # -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*- 
 '''
 Created on 2016年6月22日
 
 @author: xiaoyuan
 '''
-
-
-
-
-
-
-
 
 class treeNode:
     def __init__(self,namevalue,numOccur,parentnode):
@@ -24,7 +17,7 @@ class treeNode:
         self.count += numOccur
         
     def disp(self,ind=1):
-        print  '' * ind,self.name,' ',self.count
+        print  ' ' * ind,self.name,' ',self.count
         for child in self.children.values():
             child.disp(ind + 1)
             
@@ -59,10 +52,7 @@ def createTree(dataset,minSup=1):
             updateTree(orderedItems, retTree, headerTable, count)
     return retTree,headerTable
             
-     
-     
-     
-     
+            
 def loadSimpDat():
     simpDat = [['r', 'z', 'h', 'j', 'p'],
                ['z', 'y', 'x', 'w', 'v', 'u', 't', 's'],
@@ -72,13 +62,13 @@ def loadSimpDat():
                ['y', 'z', 'x', 'e', 'q', 's', 't', 'm']]
     return simpDat      
     
+    
 def createInitSet(dataset):
     retDict = {}
     for trans in dataset:
         retDict[frozenset(trans)]=1
     return retDict    
-    
-    
+
     
 def updateTree(items,inTree,headerTable,count):
     if items[0] in inTree.children:
@@ -93,18 +83,51 @@ def updateTree(items,inTree,headerTable,count):
         updateTree(items[1::], inTree.children[items[0]], headerTable, count)
     
         
-
 def updateHeader(nodeToTest,targetNode):
     while(nodeToTest.nodeLink != None):
         nodeToTest = nodeToTest.nodeLink
     nodeToTest.nodeLink = targetNode
                     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+               
+def ascendTree(leafNode,prefixPath):
+    if leafNode.parent != None:
+        prefixPath.append(leafNode.name)
+        ascendTree(leafNode.parent, prefixPath)
+        
+                    
+def findPrefixPath(basePat,treeNode):
+    condPats = {}
+    while treeNode != None:
+        prefixPath = []
+        ascendTree(treeNode,prefixPath)
+        if len(prefixPath) > 1:
+            condPats[frozenset(prefixPath[1:])] = treeNode.count
+        treeNode = treeNode.nodeLink
+    return condPats
+        
+        
+def mineTree(inTree,headerTable,minSup,preFix,freqItemList):
+    bigL = [v[0] for v in sorted(headerTable.items(),key = lambda p:p[1])]
+    for basePat in bigL:
+        newFreqSet = preFix.copy()
+        newFreqSet.add(basePat)
+        freqItemList.append(newFreqSet)
+        condPattBases = findPrefixPath(basePat, headerTable[basePat][1])
+        myCondTree,myHead = createTree(condPattBases, minSup)
+        if myHead != None:
+            print 'conditional tree for:',newFreqSet
+            myCondTree.disp()
+            mineTree(myCondTree, myHead, minSup, newFreqSet, freqItemList)
+        
+        
+        
+        
+def fpGrowth(dataSet,minSup = 3):
+    initSet = createInitSet(dataSet)
+    myFPtree,myHeaderTab = createTree(initSet, minSup)
+    freqItems = []
+    mineTree(myFPtree, myHeaderTab, minSup, set([]), freqItems)
+    return freqItems      
+        
+        
+        

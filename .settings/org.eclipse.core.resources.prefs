@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
-encoding//src/frequentItemsets/FP-growth/fpGrowth.py=utf-8
-encoding//src/frequentItemsets/FP-growth/test.py=utf-8
+encoding//src/frequentItemsets/FPGrowth/fpGrowth.py=utf-8
+encoding//src/frequentItemsets/FPGrowth/test.py=utf-8
 encoding//src/frequentItemsets/voteDemo/Vote.py=UTF-8
 encoding//src/frequentItemsets/voteDemo/test.py=utf-8
 encoding/<project>=UTF-8
