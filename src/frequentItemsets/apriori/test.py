@@ -8,11 +8,11 @@ Created on 2016-6-12
 
 
 
-import prior
+import aprior
 
-dataset = prior.loadDataSet()
-L,supportData = prior.apriori(dataset, 0.5)
+dataset = aprior.loadDataSet()
+L,supportData = aprior.apriori(dataset, 0.5)
 print L
 
 
-rules = prior.generateRules(L, supportData, 0.5)
+rules = aprior.generateRules(L, supportData, 0.5)
