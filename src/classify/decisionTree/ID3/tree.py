@@ -7,9 +7,6 @@ Created on 2016-8-19
 from math import log
 
 
-
-
-
 '创建数据集'
 def createDataSet():
     dataset = [[1,1,'yes'],
@@ -74,12 +71,9 @@ def majorityCnt(classList):
         if vote not in classCount.keys():
             classCount[vote] = 0
         classCount[vote] += 1
-    sortedClassCount = sorted(classCount.iteritems(),key=classCount[2],reverse = True)
+    sortedClassCount = sorted(classCount.iteritems(),classCount[2],reverse = True)
 
 
-        
-        
-    
 '创建树'
 def createTree(dataset,labels):
     classList = [example[-1] for example in dataset]
